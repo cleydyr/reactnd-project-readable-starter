@@ -67,8 +67,8 @@ describe('test services', function () {
 		);
 		it('should delete a post, leaving only 1 post on the server', () =>
 			deletePost(deletedPostId)
-				.then(() => getPosts()
-					.then(posts => expect(posts.length).toBe(1)))
+				.then(getPosts)
+				.then(posts => expect(posts.length).toBe(1))
 		);
 		it('should edit a post', () => {
 			let newBody = 'lorem ipsum';
@@ -90,8 +90,8 @@ describe('test services', function () {
 			};
 
 			return addPost(newPost)
-				.then(() => getPosts()
-					.then(posts => expect(posts.length).toBe(2)));
+				.then(getPosts)
+				.then(posts => expect(posts.length).toBe(2));
 		});
 	});
 
@@ -114,8 +114,8 @@ describe('test services', function () {
 		);
 		it('should delete a comment, leaving only 1 comment for the post', () =>
 			deleteComment('8tu4bsun805n8un48ve89')
-				.then(() => getCommentsForPost(existingPostId)
-					.then(comments => expect(comments.length).toBe(1)))
+				.then(() => getCommentsForPost(existingPostId))
+				.then(comments => expect(comments.length).toBe(1))
 		);
 		it('should edit a comment', () => {
 			let newBody = 'lorem ipsum';
@@ -136,8 +136,8 @@ describe('test services', function () {
 			};
 
 			return addComment(newComment)
-				.then(() => getCommentsForPost(existingPostId)
-					.then(comments => expect(comments.length).toBe(2)));
+				.then(() => getCommentsForPost(existingPostId))
+				.then(comments => expect(comments.length).toBe(2));
 		});
 	});
 
