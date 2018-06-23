@@ -7,6 +7,8 @@ import {
 	upVotePost,
 	downVotePost,
 	deletePost,
+	editPost,
+	addPost,
 } from './service/post-service';
 
 it('renders without crashing', () => {
@@ -41,5 +43,20 @@ describe('test services', function () {
 	it('should delete a post, leaving only 1 post on the server', () =>
       deletePost('8xf0y6ziyjabvozdd253nd').then(() => getPosts().then(posts => expect(posts.length).toBe(1)))
 	);
+	it('should edit a post, leaving only 1 post on the server', () => {
+	  let newBody = 'lorem ipsum';
+	  return editPost({id: '8xf0y6ziyjabvozdd253nd', body: newBody, title: 'newTitle'}).then(post => expect(post.body).toBe(newBody));
+	});
+	it('should add a new post, leaving 2 posts on the server', () => {
+		let newPost = {
+			id: 'D57043D7-B776-4705-B777-9867C08A49EC',
+			timestamp: Date.now(),
+			title: 'Liferay',
+			body: 'Enterprise, open source, for Life',
+			author: 'thingthree',
+			category: 'udacity',
+		};
+		return addPost(newPost).then(() => getPosts().then(posts => expect(posts.length).toBe(2)));
+	  });
   });
 });
