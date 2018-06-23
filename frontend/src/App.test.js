@@ -17,7 +17,7 @@ describe('test services', function () {
     server = require('../../api-server/server');
   });
 
-  afterEach(function () {
+  afterAll(function () {
     server.close();
   });
 
