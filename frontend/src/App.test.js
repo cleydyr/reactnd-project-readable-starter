@@ -33,7 +33,7 @@ it('renders without crashing', () => {
 });
 
 describe('test services', function () {
-	var server;
+	let server;
 	beforeAll(function () {
 	  server = require('../../api-server/server');
 	});
