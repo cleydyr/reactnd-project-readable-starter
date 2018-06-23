@@ -13,7 +13,6 @@ const app = express()
 app.use(express.static('public'))
 app.use(cors())
 
-
 app.get('/', (req, res) => {
   const help = `
   <pre>
@@ -314,6 +313,6 @@ app.delete('/comments/:id', (req, res) => {
       )
 })
 
-app.listen(config.port, () => {
+module.exports = app.listen(config.port, () => {
   console.log('Server listening on port %s, Ctrl+C to stop', config.port)
 })
