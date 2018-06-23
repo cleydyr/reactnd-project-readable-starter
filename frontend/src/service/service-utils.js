@@ -17,6 +17,7 @@ export default function getOptions(path, method = 'GET') {
 		headers: {
 			'Accept': 'application/json',
 			'Authorization': READABLE_API_TOKEN,
+			'Content-Type': 'application/json',
 		},
 		json: true,
 	};
