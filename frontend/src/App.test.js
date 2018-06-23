@@ -7,3 +7,14 @@ it('renders without crashing', () => {
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+describe('loading express', function () {
+  var server;
+  beforeEach(function () {
+    server = require('../../api-server/server');
+  });
+
+  afterEach(function () {
+    server.close();
+  });
+});
