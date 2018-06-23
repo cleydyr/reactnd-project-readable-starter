@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {
 	getPosts,
+	getPost,
 } from './service/post-service';
 
 it('renders without crashing', () => {
@@ -24,6 +25,9 @@ describe('test services', function () {
   describe('test posts', function () {
 	it('should have 2 posts on the server', () =>
       getPosts().then(posts => expect(posts.length).toBe(2))
+	);
+	it('should have a defined post with author thingone', () =>
+      getPost('6ni6ok3ym7mf1p33lnez').then(post => expect(post.author).toBe('thingone'))
 	);
   });
 });
