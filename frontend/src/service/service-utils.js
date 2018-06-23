@@ -21,3 +21,5 @@ export default function getOptions(path, method = 'GET') {
 		json: true,
 	};
 };
+
+export {methods};
