@@ -4,6 +4,9 @@ import rp from 'request-promise';
 export const getPosts = () =>
 	rp(getOptions('/posts'));
 
+export const getPostsForCategory = (categoryId) =>
+	rp(getOptions(`/${categoryId}/posts`));
+
 export const addPost = ({id, timestamp, title, body, author, category,}) => {
 	const options = getOptions('/posts', methods.POST);
 	return rp({
