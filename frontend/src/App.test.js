@@ -5,6 +5,7 @@ import {
 	getPosts,
 	getPost,
 	upVotePost,
+	downVotePost,
 } from './service/post-service';
 
 it('renders without crashing', () => {
@@ -32,6 +33,9 @@ describe('test services', function () {
 	);
 	it('should increase a given vote score by +1', () =>
       upVotePost('6ni6ok3ym7mf1p33lnez').then(post => expect(post.voteScore).toBe(-4))
+	);
+	it('should increase a given vote score by +1', () =>
+      downVotePost('8xf0y6ziyjabvozdd253nd').then(post => expect(post.voteScore).toBe(5))
 	);
   });
 });
