@@ -4,6 +4,7 @@ import App from './App';
 import {
 	getPosts,
 	getPost,
+	upVotePost,
 } from './service/post-service';
 
 it('renders without crashing', () => {
@@ -28,6 +29,9 @@ describe('test services', function () {
 	);
 	it('should have a defined post with author thingone', () =>
       getPost('6ni6ok3ym7mf1p33lnez').then(post => expect(post.author).toBe('thingone'))
+	);
+	it('should increase a given vote score by +1', () =>
+      upVotePost('6ni6ok3ym7mf1p33lnez').then(post => expect(post.voteScore).toBe(-4))
 	);
   });
 });
