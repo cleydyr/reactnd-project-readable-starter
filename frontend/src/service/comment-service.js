@@ -39,7 +39,7 @@ export const editComment = ({id, timestamp, body,}) => {
 	const options = getOptions(`/comments/${id}`, methods.PUT);
 	return rp({
 		...options,
-		body: {id, timestamp, body,},
+		body: {timestamp, body,},
 	});
 };
 
