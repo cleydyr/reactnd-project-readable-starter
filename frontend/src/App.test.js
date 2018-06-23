@@ -11,6 +11,21 @@ import {
 	addPost,
 } from './service/post-service';
 
+import {
+	getCommentsForPost,
+	getComments,
+	getComment,
+	upVoteComment,
+	downVoteComment,
+	deleteComment,
+	editComment,
+	addComment,
+} from './service/comment-service';
+
+import { getCategories } from './service/categories-service';
+
+const logIt = result => console.log(result) || result;
+
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<App />, div);
@@ -47,7 +62,7 @@ describe('test services', function () {
 	);
 	it('should edit a post', () => {
 	  let newBody = 'lorem ipsum';
-	  return editPost({id: '8xf0y6ziyjabvozdd253nd', body: newBody, title: 'newTitle'}).then(post => expect(post.body).toBe(newBody));
+	  return editPost({id: existingPostId, body: newBody, title: 'newTitle'}).then(post => expect(post.body).toBe(newBody));
 	});
 	it('should add a new post, leaving 2 posts on the server', () => {
 		let newPost = {
@@ -60,5 +75,44 @@ describe('test services', function () {
 		};
 		return addPost(newPost).then(() => getPosts().then(posts => expect(posts.length).toBe(2)));
 	  });
+  });
+
+  describe('test comments', function () {
+	it('should have 2 comments for a given post', () =>
+	  getCommentsForPost(existingPostId).then(comments => expect(comments.length).toBe(2))
+    );
+	it('should have a defined comment with author thingtwo', () =>
+      getComment('894tuq4ut84ut8v4t8wun89g').then(comment => expect(comment.author).toBe('thingtwo'))
+	);
+	it('should increase a given vote score by +1', () =>
+      upVoteComment('8tu4bsun805n8un48ve89').then(comment => expect(comment.voteScore).toBe(-4))
+	);
+	it('should decrease a given vote score by +1', () =>
+      downVoteComment('894tuq4ut84ut8v4t8wun89g').then(comment => expect(comment.voteScore).toBe(5))
+	);
+	it('should delete a comment, leaving only 1 comment on the server', () =>
+      deleteComment('8tu4bsun805n8un48ve89').then(() => getCommentsForPost(existingPostId).then(comments => expect(comments.length).toBe(1)))
+	);
+	it('should edit a comment', () => {
+	  let newBody = 'lorem ipsum';
+	  return editComment({id: '894tuq4ut84ut8v4t8wun89g', body: newBody, timestamp: Date.now()})
+	  	.then(comment => expect(comment.body).toBe(newBody));
+	});
+	it('should add a new comments, leaving 2 comments on the server', () => {
+		let newComment = {
+			id: '54E64A9C-20D0-49A7-AAAA-1AB732D9AB79',
+			timestamp: Date.now(),
+			body: 'Help people reach their potential to serve others',
+			author: 'Cleydyr',
+			parentId: existingPostId,
+		};
+		return addComment(newComment).then(() => getCommentsForPost(existingPostId).then(comments => expect(comments.length).toBe(2)));
+	  });
+  });
+
+  describe('test categories', function () {
+	it('should have 3 categories', () =>
+	  getCategories().then(categories => expect(categories.categories.length).toBe(3))
+    );
   });
 });
