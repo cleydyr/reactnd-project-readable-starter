@@ -14,7 +14,6 @@ import {
 
 import {
 	getCommentsForPost,
-	getComments,
 	getComment,
 	upVoteComment,
 	downVoteComment,
