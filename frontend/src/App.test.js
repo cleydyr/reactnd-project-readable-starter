@@ -37,13 +37,13 @@ describe('test services', function () {
 	it('should increase a given vote score by +1', () =>
       upVotePost('6ni6ok3ym7mf1p33lnez').then(post => expect(post.voteScore).toBe(-4))
 	);
-	it('should increase a given vote score by +1', () =>
+	it('should decrease a given vote score by +1', () =>
       downVotePost('8xf0y6ziyjabvozdd253nd').then(post => expect(post.voteScore).toBe(5))
 	);
 	it('should delete a post, leaving only 1 post on the server', () =>
       deletePost('8xf0y6ziyjabvozdd253nd').then(() => getPosts().then(posts => expect(posts.length).toBe(1)))
 	);
-	it('should edit a post, leaving only 1 post on the server', () => {
+	it('should edit a post', () => {
 	  let newBody = 'lorem ipsum';
 	  return editPost({id: '8xf0y6ziyjabvozdd253nd', body: newBody, title: 'newTitle'}).then(post => expect(post.body).toBe(newBody));
 	});
