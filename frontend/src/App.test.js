@@ -43,7 +43,7 @@ describe('test services', function () {
 	});
 
 	const existingPostId = '8xf0y6ziyjabvozdd253nd';
-	const deletedPostId = '6ni6ok3ym7mf1p33lnez'
+	const deletedPostId = '6ni6ok3ym7mf1p33lnez';
 
 	describe('test posts', function () {
 		it('should have 1 post under the category redux', () =>
