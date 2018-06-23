@@ -11,7 +11,7 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-describe('loading express', function () {
+describe('test services', function () {
   var server;
   beforeEach(function () {
     server = require('../../api-server/server');
@@ -21,7 +21,9 @@ describe('loading express', function () {
     server.close();
   });
 
-  it('should have 2 posts on the server', () =>
-	getPosts().then(posts => expect(posts.length).toBe(2))
-  );
+  describe('test posts', function () {
+	it('should have 2 posts on the server', () =>
+      getPosts().then(posts => expect(posts.length).toBe(2))
+	);
+  });
 });
