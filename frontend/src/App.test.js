@@ -6,6 +6,7 @@ import {
 	getPost,
 	upVotePost,
 	downVotePost,
+	deletePost,
 } from './service/post-service';
 
 it('renders without crashing', () => {
@@ -36,6 +37,9 @@ describe('test services', function () {
 	);
 	it('should increase a given vote score by +1', () =>
       downVotePost('8xf0y6ziyjabvozdd253nd').then(post => expect(post.voteScore).toBe(5))
+	);
+	it('should delete a post, leaving only 1 post on the server', () =>
+      deletePost('8xf0y6ziyjabvozdd253nd').then(() => getPosts().then(posts => expect(posts.length).toBe(1)))
 	);
   });
 });
