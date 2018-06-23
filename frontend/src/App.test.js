@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import {
+	getPosts,
+} from './service/post-service';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -17,4 +20,8 @@ describe('loading express', function () {
   afterEach(function () {
     server.close();
   });
+
+  it('should have 2 posts on the server', () =>
+	getPosts().then(posts => expect(posts.length).toBe(2))
+  );
 });
