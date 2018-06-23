@@ -9,6 +9,7 @@ import {
 	deletePost,
 	editPost,
 	addPost,
+	getPostsForCategory,
 } from './service/post-service';
 
 import {
@@ -45,6 +46,9 @@ describe('test services', function () {
 	const existingPostId = '8xf0y6ziyjabvozdd253nd';
 	const deletedPostId = '6ni6ok3ym7mf1p33lnez'
   describe('test posts', function () {
+	it('should have 1 post under the category redux', () =>
+		getPostsForCategory('redux').then(posts => expect(posts.length).toBe(1))
+  	);
 	it('should have 2 posts on the server', () =>
       getPosts().then(posts => expect(posts.length).toBe(2))
 	);
