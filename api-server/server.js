@@ -313,6 +313,10 @@ app.delete('/comments/:id', (req, res) => {
       )
 })
 
-module.exports = app.listen(config.port, () => {
-  console.log('Server listening on port %s, Ctrl+C to stop', config.port)
-})
+const server = app.listen(config.port, () => {
+	console.log('Server listening on port %s, Ctrl+C to stop', config.port)
+});
+
+server.on('close', () => console.log('server closed'));
+
+module.exports = server;
