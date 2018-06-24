@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 
 export default class ComponentList extends Component {
 	render() {
-		const {posts} = this.props;
+		const {posts, category} = this.props;
 		return (
 			<ul>
-				{posts.map(post => (
-					<li key={post.id}>{post.title}</li>
-				))}
+				{
+					posts
+						.filter(post => !category || post.category === category)
+						.map(post => (<li key={post.id}>{post.title}</li>))}
 			</ul>
 		);
 	}
