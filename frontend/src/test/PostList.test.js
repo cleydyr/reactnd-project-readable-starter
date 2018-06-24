@@ -29,7 +29,7 @@ const defaultPosts = [
 ];
 
 describe('PostList tests', () => {
-	it('should have only one ul element', () => {
+	it('should is a ul element', () => {
 		const wrapper = shallow(
 			<PostList posts={[]} />
 		);
