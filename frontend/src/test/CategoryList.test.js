@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import {shallow} from 'enzyme';
-import CategoryList from './components/CategoryList';
+import CategoryList from '../components/CategoryList';
 
 describe('CategoryList tests', () => {
 	it('should have only one ul element', () => {

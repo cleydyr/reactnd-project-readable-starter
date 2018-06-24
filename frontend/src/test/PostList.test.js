@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import {shallow} from 'enzyme';
-import PostList from './components/PostList';
+import PostList from '../components/PostList';
 
 const defaultPosts = [
 	{
@@ -47,5 +46,21 @@ describe('PostList tests', () => {
 
 		return expect(wrapper.children().find('li').length)
 			.toBe(defaultPosts.length);
+	});
+
+	it(`should have as many one li's elements as the size of the posts props
+			passed to it`, () => {
+
+		const chosenCategory = 'redux';
+
+		const filteredPosts = defaultPosts
+			.filter(post => post.category === chosenCategory);
+
+		const wrapper = shallow(
+			<PostList posts={defaultPosts} category={chosenCategory}/>
+		);
+
+		return expect(wrapper.children().find('li').length)
+			.toBe(filteredPosts.length);
 	});
 });

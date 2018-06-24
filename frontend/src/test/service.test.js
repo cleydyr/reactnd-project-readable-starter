@@ -7,7 +7,7 @@ import {
 	editPost,
 	addPost,
 	getPostsForCategory,
-} from './service/post-service';
+} from '../service/post-service';
 
 import {
 	getCommentsForPost,
@@ -17,22 +17,22 @@ import {
 	deleteComment,
 	editComment,
 	addComment,
-} from './service/comment-service';
+} from '../service/comment-service';
 
-import { getCategories } from './service/categories-service';
+import { getCategories } from '../service/categories-service';
 
 const logIt = result => console.log(result) || result;
 
+let server;
+beforeAll(function () {
+	server = require('../../../api-server/server');
+});
+
+afterAll(function () {
+	server.close();
+});
+
 describe('test services', function () {
-	let server;
-	beforeAll(function () {
-		server = require('../../api-server/server');
-	});
-
-	afterAll(function () {
-		server.close();
-	});
-
 	const existingPostId = '8xf0y6ziyjabvozdd253nd';
 	const deletedPostId = '6ni6ok3ym7mf1p33lnez';
 
