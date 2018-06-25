@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {shallow} from 'enzyme';
 import PostList from '../components/PostList';
+import {Link} from 'react-router-dom';
 
 const defaultPosts = [
 	{
@@ -45,6 +46,23 @@ describe('PostList tests', () => {
 		);
 
 		return expect(wrapper.children().find('li').length)
+			.toBe(defaultPosts.length);
+	});
+
+	it(`should have as many Link elements as the size of the posts props
+		passed to it`, () => {
+
+		const wrapper = shallow(
+			<PostList posts={defaultPosts} />
+		);
+
+		return expect(
+				wrapper
+					.children()
+					.map(el => el.children())
+					.filter(el => el.name() === 'Link')
+					.length
+			)
 			.toBe(defaultPosts.length);
 	});
 
