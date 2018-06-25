@@ -30,13 +30,17 @@ class App extends Component {
   }
 
   render() {
+	const postListWithCategory = ({match}) => (
+		<div>
+			<CategoryList categories={this.state.categories}/>
+			<PostList posts={this.state.posts} category={match && match.params && match.params.name}/>
+		</div>
+	);
     return (
       <div className="App">
-        <CategoryList categories={this.state.categories}/>
+		<Route exact path="/" render={postListWithCategory} />
 		<Route path="/category/:name"
-			render={({match}) => (
-				<PostList posts={this.state.posts} category={match.params.name}/>
-			)}
+			render={postListWithCategory}
 		/>
       </div>
     );
