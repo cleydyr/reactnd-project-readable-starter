@@ -5,6 +5,7 @@ import PostList from './components/PostList';
 import { getCategories } from './service/categories-service';
 import { getPosts } from './service/post-service';
 import {Route} from 'react-router-dom';
+import PostDisplay from './components/PostDisplay';
 
 class App extends Component {
   constructor() {
@@ -42,6 +43,9 @@ class App extends Component {
 		<Route path="/category/:name"
 			render={postListWithCategory}
 		/>
+		<Route path="/post/:id" render={
+			({match}) => this.state.posts.length && <PostDisplay post={this.state.posts.find(post => post.id === match.params.id)}/>
+		}/>
       </div>
     );
   }
