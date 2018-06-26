@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { getCategories } from './service/categories-service';
 import { getPosts } from './service/post-service';
 import {Route, Link} from 'react-router-dom';
