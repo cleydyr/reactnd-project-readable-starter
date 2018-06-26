@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import CategoryList from './components/CategoryList';
-import PostList from './components/PostList';
 import { getCategories } from './service/categories-service';
 import { getPosts } from './service/post-service';
 import {Route} from 'react-router-dom';
 import PostDisplay from './components/PostDisplay';
+import RootDisplay from './components/RootDisplay';
 
 class App extends Component {
   constructor() {
@@ -31,12 +30,16 @@ class App extends Component {
   }
 
   render() {
+	const {posts, categories} = this.state;
+
 	const postListWithCategory = ({match}) => (
-		<div>
-			<CategoryList categories={this.state.categories}/>
-			<PostList posts={this.state.posts} category={match && match.params && match.params.name}/>
-		</div>
+		<RootDisplay
+			posts={posts}
+			categories={categories}
+			categoryName={match.params && match.params.name}
+		/>
 	);
+
     return (
       <div className="App">
 		<Route exact path="/" render={postListWithCategory} />
@@ -44,7 +47,10 @@ class App extends Component {
 			render={postListWithCategory}
 		/>
 		<Route path="/post/:id" render={
-			({match}) => this.state.posts.length && <PostDisplay post={this.state.posts.find(post => post.id === match.params.id)}/>
+			({match}) => posts.length &&
+				<PostDisplay post={
+					posts.find(post => post.id === match.params.id)
+				}/>
 		}/>
       </div>
     );
