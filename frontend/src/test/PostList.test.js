@@ -65,20 +65,4 @@ describe('PostList tests', () => {
 			)
 			.toBe(defaultPosts.length);
 	});
-
-	it(`should have as many one li's elements as the size of the posts props
-			passed to it`, () => {
-
-		const chosenCategory = 'redux';
-
-		const filteredPosts = defaultPosts
-			.filter(post => post.category === chosenCategory);
-
-		const wrapper = shallow(
-			<PostList posts={defaultPosts} category={chosenCategory}/>
-		);
-
-		return expect(wrapper.children().find('li').length)
-			.toBe(filteredPosts.length);
-	});
 });
