@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { getCategories } from './service/categories-service';
 import { getPosts } from './service/post-service';
-import {Route} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
 import PostDisplay from './components/PostDisplay';
 import RootDisplay from './components/RootDisplay';
 
@@ -41,7 +41,8 @@ class App extends Component {
 	);
 
     return (
-      <div className="App">
+      <div>
+		<h1><Link to="/">Readable App</Link></h1>
 		<Route exact path="/" render={postListWithCategory} />
 		<Route path="/category/:name"
 			render={postListWithCategory}
