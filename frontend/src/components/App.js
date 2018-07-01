@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { getCategories } from './service/categories-service';
-import { getPosts } from './service/post-service';
+import { getCategories } from '../service/categories-service';
+import { getPosts } from '../service/post-service';
 import {Route, Link} from 'react-router-dom';
-import PostDisplay from './components/PostDisplay';
-import RootDisplay from './components/RootDisplay';
+import PostDisplay from './PostDisplay';
+import RootDisplay from './RootDisplay';
 
 class App extends Component {
   constructor() {
