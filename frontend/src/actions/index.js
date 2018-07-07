@@ -9,7 +9,7 @@ const actionList = [
 	'DOWNVOTE_COMMENT',
 	'UPVOTE_POST',
 	'DOWNVOTE_POST',
-	'UPDATE_COMMENTS_LIST',
+	'UPDATE_COMMENTS',
 	'UPDATE_POSTS',
 	'UPDATE_CATEGORIES',
 ];
@@ -59,7 +59,7 @@ export function updatePosts({posts}) {
 
 export function updateCommentsList({comments,}) {
 	return {
-		type: actions.UPDATE_COMMENTS_LIST,
+		type: actions.UPDATE_COMMENTS,
 		comments,
 	}
 }

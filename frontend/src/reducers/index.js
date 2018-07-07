@@ -26,7 +26,7 @@ export default function reducer(state = initialState, action) {
 				categories,
 			};
 
-		case actions.UPDATE_COMMENTS_LIST:
+		case actions.UPDATE_COMMENTS:
 
 			return {
 				...state,
