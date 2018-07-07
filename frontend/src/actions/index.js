@@ -78,10 +78,10 @@ export function addComment({postId, body,}) {
 		parentDeleted: false,
 	};
 
-	serviceAddComment(comment);
-
-	return {
-		type: actions.ADD_COMMENT,
-		comment,
-	}
+	return dispatch =>
+		serviceAddComment(comment)
+			.then(comment => dispatch({
+				type: actions.ADD_COMMENT,
+				comment,
+			}));
 }
