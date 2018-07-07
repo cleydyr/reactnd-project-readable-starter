@@ -3,7 +3,7 @@ import CommentsList from './CommentsList';
 import AddCommentButton from './AddCommentButton';
 import CommentForm from './CommentForm';
 
-export default class PostDisplay extends Component {
+class PostDisplay extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -43,3 +43,5 @@ export default class PostDisplay extends Component {
 		);
 	}
 }
+
+export default PostDisplay;

@@ -47,9 +47,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (store, props) => ({
-	posts: store.posts,
-	categories: store.categories,
+const mapStateToProps = (state, props) => ({
+	posts: state.posts,
+	categories: state.categories,
 });
 
 const mapDispatchToProps = dispatch => ({

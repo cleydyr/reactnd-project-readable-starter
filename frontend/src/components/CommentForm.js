@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { addComment } from '../service/comment-service';
-import uuidv1 from 'uuid/v1';
+import { addComment } from '../actions';
+import {connect} from 'react-redux';
 
-export default class CommentForm extends Component {
+class CommentForm extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -17,15 +17,11 @@ export default class CommentForm extends Component {
 	}
 
 	addComment = (body) => {
-		addComment(
-			{
-				id: uuidv1(),
-				timestamp: Date.now(),
-				body,
-				author: 'theuser',
-				parentId: this.props.postId,
-			}
-		).then(this.props.onCancel);
+		const {dispatchComment, postId, onCancel} = this.props;
+
+		dispatchComment(postId)(body);
+
+		onCancel();
 	};
 
 	render() {
@@ -39,3 +35,10 @@ export default class CommentForm extends Component {
 		);
 	}
 }
+
+const mapDispatchToProps = dispatch => ({
+	dispatchComment: postId => body =>
+		dispatch(addComment({postId, body})),
+});
+
+export default connect(null, mapDispatchToProps)(CommentForm);

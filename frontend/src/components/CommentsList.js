@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 import { getCommentsForPost } from '../service/comment-service';
+import {connect} from 'react-redux';
+import { updateCommentsList } from '../actions';
 
-export default class CommentsList extends Component {
-	constructor() {
-		super();
-		this.state = {
-			comments: [],
-		};
-	}
+class CommentsList extends Component {
+
 	componentDidMount() {
-		getCommentsForPost(this.props.postId)
-			.then(comments => this.setState({
-				comments,
-			}));
+		const {postId, dispatchCommentsList} = this.props;
+
+		getCommentsForPost(postId)
+			.then(dispatchCommentsList);
 	}
 
 	render() {
-		const {comments} = this.state;
+		const {comments} = this.props;
 		return (
 			<div>
-				{comments.length ?
+				{comments && comments.length ?
 					comments.map(comment => (
 						<div key={comment.id}>
 							<strong>{comment.author}</strong> says: <br/>
@@ -33,3 +30,15 @@ export default class CommentsList extends Component {
 		);
 	}
 }
+
+const mapStateToProps = ({comments,}, {postId}) => ({
+	postId,
+	comments: comments.filter(comment => comment.parentId === postId),
+});
+
+const mapDispatchToProps = dispatch => ({
+	dispatchCommentsList: comments =>
+		dispatch(updateCommentsList({comments})),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentsList);
