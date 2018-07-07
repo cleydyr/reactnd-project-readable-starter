@@ -7,10 +7,10 @@ import {fetchPosts, fetchCategories} from '../actions';
 
 class App extends Component {
   componentDidMount() {
-	const {doFetchCategories, doFetchPosts} = this.props;
+	const {dispatchFetchCategories, dispatchFetchPosts} = this.props;
 
-	doFetchCategories();
-	doFetchPosts();
+	dispatchFetchCategories();
+	dispatchFetchPosts();
   }
 
   render() {
@@ -48,8 +48,8 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	doFetchCategories: () => dispatch(fetchCategories()),
-	doFetchPosts: () =>	dispatch(fetchPosts()),
+	dispatchFetchCategories: () => dispatch(fetchCategories()),
+	dispatchFetchPosts: () =>	dispatch(fetchPosts()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
