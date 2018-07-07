@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { getCommentsForPost } from '../service/comment-service';
 import {connect} from 'react-redux';
-import { updateCommentsList } from '../actions';
+import { updateCommentsList, fetchComments } from '../actions';
 
 class CommentsList extends Component {
 
 	componentDidMount() {
-		const {postId, dispatchCommentsList} = this.props;
-
-		getCommentsForPost(postId)
-			.then(dispatchCommentsList);
+		const {postId, dispatchFetchComments} = this.props;
+		dispatchFetchComments(postId);
 	}
 
 	render() {
@@ -39,6 +37,7 @@ const mapStateToProps = ({comments,}, {postId}) => ({
 const mapDispatchToProps = dispatch => ({
 	dispatchCommentsList: comments =>
 		dispatch(updateCommentsList({comments})),
+	dispatchFetchComments: postId => dispatch(fetchComments({postId})),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentsList);

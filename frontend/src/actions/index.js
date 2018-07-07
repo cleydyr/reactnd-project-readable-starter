@@ -1,5 +1,8 @@
 import uuidv1 from 'uuid/v1';
-import {addComment as serviceAddComment} from '../service/comment-service';
+import {
+	addComment as serviceAddComment,
+	getCommentsForPost,
+} from '../service/comment-service';
 import { getCategories } from '../service/categories-service';
 import { getPosts } from '../service/post-service';
 
@@ -33,6 +36,13 @@ export function fetchCategories() {
 	return dispatch =>  {
 		return getCategories()
 			.then(({categories}) => dispatch(updateCategories({categories})));
+	}
+}
+
+export function fetchComments({postId}) {
+	return dispatch =>  {
+		return getCommentsForPost(postId)
+			.then(comments => dispatch(updateCommentsList({comments,})));
 	}
 }
 
