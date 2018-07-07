@@ -5,11 +5,7 @@ import {
 const initialState = {
 	posts: [],
 	categories: [],
-	addComment: false,
-	editComment: false,
-	editPost: false,
-	//editPostId: null,
-	commentText: '',
+	comments: [],
 }
 
 export default function reducer(state = initialState, action) {
