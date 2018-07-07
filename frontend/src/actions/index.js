@@ -59,8 +59,8 @@ export function updatePosts({posts}) {
 
 export function updateCommentsList({comments,}) {
 	return {
-		comments,
 		type: actions.UPDATE_COMMENTS_LIST,
+		comments,
 	}
 }
 
