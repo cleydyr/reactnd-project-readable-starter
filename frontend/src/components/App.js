@@ -8,15 +8,6 @@ import {connect} from 'react-redux';
 import {updateData} from '../actions';
 
 class App extends Component {
-  constructor() {
-	  super();
-	  this.state = {
-		  categories: [],
-		  posts: [],
-	  };
-
-  }
-
   componentDidMount() {
 	Promise.all(
 		[
