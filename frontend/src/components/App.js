@@ -4,6 +4,8 @@ import { getPosts } from '../service/post-service';
 import {Route, Link} from 'react-router-dom';
 import PostDisplay from './PostDisplay';
 import RootDisplay from './RootDisplay';
+import {connect} from 'react-redux';
+import {updateData} from '../actions';
 
 class App extends Component {
   constructor() {
@@ -22,14 +24,11 @@ class App extends Component {
 			getPosts(),
 		]
 	)
-		.then(([{categories}, posts]) => this.setState({
-			categories,
-			posts,
-		}))
+		.then(this.props.updateCategoriesAndPosts);
   }
 
   render() {
-	const {posts, categories} = this.state;
+	const {posts, categories} = this.props;
 
 	const postListWithCategory = ({match}) => (
 		<RootDisplay
@@ -57,4 +56,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (store, props) => ({
+	posts: store.posts,
+	categories: store.categories,
+});
+
+const mapDispatchToProps = dispatch => ({
+	updateCategoriesAndPosts: ([{categories}, posts,]) =>
+			dispatch(updateData({categories, posts,})),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
