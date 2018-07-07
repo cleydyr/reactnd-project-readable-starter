@@ -5,7 +5,7 @@ import {Route, Link, withRouter} from 'react-router-dom';
 import PostDisplay from './PostDisplay';
 import RootDisplay from './RootDisplay';
 import {connect} from 'react-redux';
-import {updateData} from '../actions';
+import {updateCategoriesAndPosts} from '../actions';
 
 class App extends Component {
   componentDidMount() {
@@ -54,7 +54,7 @@ const mapStateToProps = (store, props) => ({
 
 const mapDispatchToProps = dispatch => ({
 	updateCategoriesAndPosts: ([{categories}, posts,]) =>
-			dispatch(updateData({categories, posts,})),
+			dispatch(updateCategoriesAndPosts({categories, posts,})),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

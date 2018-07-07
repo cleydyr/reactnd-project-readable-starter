@@ -23,7 +23,7 @@ export function filterPost(categoryId) {
 	}
 }
 
-export function updateData({categories, posts,}) {
+export function updateCategoriesAndPosts({categories, posts,}) {
 	return {
 		categories,
 		posts,
