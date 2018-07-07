@@ -26,7 +26,6 @@ export const actions = actionList.reduce(
 
 	{});
 
-
 export function fetchPosts() {
 	return dispatch => getPosts()
 		.then(posts => dispatch(updatePosts({posts})));
@@ -43,13 +42,6 @@ export function fetchComments({postId}) {
 	return dispatch =>  {
 		return getCommentsForPost(postId)
 			.then(comments => dispatch(updateCommentsList({comments,})));
-	}
-}
-
-export function filterPost(categoryId) {
-	return {
-		type: actions.FILTER_POSTS,
-		categoryId,
 	}
 }
 
