@@ -79,7 +79,7 @@ export function addComment({postId, body,}) {
 	serviceAddComment(comment);
 
 	return {
-		comment,
 		type: actions.ADD_COMMENT,
+		comment,
 	}
 }
