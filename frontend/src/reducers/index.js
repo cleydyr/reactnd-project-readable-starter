@@ -12,11 +12,17 @@ export default function reducer(state = initialState, action) {
 	const {posts, categories, comments, comment} = action;
 
 	switch(action.type) {
-		case actions.UPDATE_DATA:
+		case actions.UPDATE_POSTS:
 
 			return {
 				...state,
 				posts,
+			};
+
+		case actions.UPDATE_CATEGORIES:
+
+			return {
+				...state,
 				categories,
 			};
 

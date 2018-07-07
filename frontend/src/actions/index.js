@@ -1,5 +1,7 @@
 import uuidv1 from 'uuid/v1';
 import {addComment as serviceAddComment} from '../service/comment-service';
+import { getCategories } from '../service/categories-service';
+import { getPosts } from '../service/post-service';
 
 const actionList = [
 	'ADD_COMMENT',
@@ -7,8 +9,9 @@ const actionList = [
 	'DOWNVOTE_COMMENT',
 	'UPVOTE_POST',
 	'DOWNVOTE_POST',
-	'UPDATE_DATA',
 	'UPDATE_COMMENTS_LIST',
+	'UPDATE_POSTS',
+	'UPDATE_CATEGORIES',
 ];
 
 export const actions = actionList.reduce(
@@ -20,6 +23,19 @@ export const actions = actionList.reduce(
 
 	{});
 
+
+export function fetchPosts() {
+	return dispatch => getPosts()
+		.then(posts => dispatch(updatePosts({posts})));
+}
+
+export function fetchCategories() {
+	return dispatch =>  {
+		return getCategories()
+			.then(({categories}) => dispatch(updateCategories({categories})));
+	}
+}
+
 export function filterPost(categoryId) {
 	return {
 		type: actions.FILTER_POSTS,
@@ -27,11 +43,17 @@ export function filterPost(categoryId) {
 	}
 }
 
-export function updateCategoriesAndPosts({categories, posts,}) {
+export function updateCategories({categories}) {
 	return {
+		type: actions.UPDATE_CATEGORIES,
 		categories,
+	}
+}
+
+export function updatePosts({posts}) {
+	return {
+		type: actions.UPDATE_POSTS,
 		posts,
-		type: actions.UPDATE_DATA,
 	}
 }
 

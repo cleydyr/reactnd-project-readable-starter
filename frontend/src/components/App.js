@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
-import { getCategories } from '../service/categories-service';
-import { getPosts } from '../service/post-service';
 import {Route, Link, withRouter} from 'react-router-dom';
 import PostDisplay from './PostDisplay';
 import RootDisplay from './RootDisplay';
 import {connect} from 'react-redux';
-import {updateCategoriesAndPosts} from '../actions';
+import {fetchPosts, fetchCategories} from '../actions';
 
 class App extends Component {
   componentDidMount() {
-	Promise.all(
-		[
-			getCategories(),
-			getPosts(),
-		]
-	)
-		.then(this.props.updateCategoriesAndPosts);
+	const {doFetchCategories, doFetchPosts} = this.props;
+
+	doFetchCategories();
+	doFetchPosts();
   }
 
   render() {
@@ -53,8 +48,8 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	updateCategoriesAndPosts: ([{categories}, posts,]) =>
-			dispatch(updateCategoriesAndPosts({categories, posts,})),
+	doFetchCategories: () => dispatch(fetchCategories()),
+	doFetchPosts: () =>	dispatch(fetchPosts()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

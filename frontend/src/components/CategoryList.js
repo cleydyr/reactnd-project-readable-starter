@@ -6,7 +6,7 @@ export default class CategoryList extends Component {
 		const {categories} = this.props;
 		return (
 			<ul>
-				{categories.map(category => (
+				{categories && categories.map(category => (
 					<li key={category.name}>
 						<Link to={`/category/${category.name}`}>
 							{category.name}
