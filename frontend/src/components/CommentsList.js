@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { getCommentsForPost } from '../service/comment-service';
 import {connect} from 'react-redux';
 import { updateCommentsList, fetchComments } from '../actions';
 
