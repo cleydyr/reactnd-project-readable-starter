@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { getCommentsForPost } from '../service/comment-service';
 
 class CommentsDisplay extends Component {
 	render() {
