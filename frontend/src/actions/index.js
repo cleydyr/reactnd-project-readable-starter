@@ -4,13 +4,13 @@ import {
 	upVoteComment as serviceUpvoteComment,
 	downVoteComment as serviceDownVoteComment,
 	getCommentsForPost,
-} from '../service/comment-service';
-import { getCategories } from '../service/categories-service';
+} from '../service/wedeploy-comment-service';
+import { getCategories } from '../service/wedeploy-categories-service';
 import {
 	getPosts,
 	upVotePost as serviceUpvotePost,
 	downVotePost as serviceDownvotePost,
-} from '../service/post-service';
+} from '../service/wedeploy-post-service';
 
 const actionList = [
 	'ADD_COMMENT',
@@ -72,7 +72,7 @@ export function fetchPosts() {
 export function fetchCategories() {
 	return dispatch =>  {
 		return getCategories()
-			.then(({categories}) => dispatch(updateCategories({categories})));
+			.then((categories) => dispatch(updateCategories({categories})));
 	}
 }
 
