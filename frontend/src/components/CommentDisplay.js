@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import { getCommentsForPost } from '../service/comment-service';
 
-export default class CommentsList extends Component {
+class CommentsDisplay extends Component {
 	render() {
+		const {comment: {author, body, voteScore, id}, onDownVoteComment, onUpVoteComment} = this.props;
+
 		return (
 			<div>
-				<strong>{comment.author}</strong> says: <br/>
-				<p>{comment.body}</p>
-				<small>{comment.voteScore} {Math.abs(comment.voteScore) === 1 ? 'vote' : 'votes'}</small>
+				<strong>{author}</strong> says: <br/>
+				<p>{body}</p>
+				<small>
+					{voteScore} {Math.abs(voteScore) === 1 ? 'vote ' : 'votes '}
+					<button onClick={() => onDownVoteComment(id)}>▼</button>
+					<button onClick={() => onUpVoteComment(id)}>▲</button>
+				</small>
 			</div>
 		);
 	}
 }
+
+export default CommentsDisplay;

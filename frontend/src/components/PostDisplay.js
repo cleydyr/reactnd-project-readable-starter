@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import CommentsList from './CommentsList';
 import AddCommentButton from './AddCommentButton';
 import CommentForm from './CommentForm';
+import {connect} from 'react-redux';
+import { downVotePost, upVotePost } from '../actions';
 
 class PostDisplay extends Component {
 	constructor() {
@@ -27,10 +29,13 @@ class PostDisplay extends Component {
 		const {title, voteScore, author, body, timestamp, id} = this.props.post;
 		return (
 			<div>
-				<h1>{title} ({voteScore})</h1>
+				<h1>{title}</h1>
 				<em>by {author}</em>
 				<p>{body}</p>
-				<small>Published {(new Date(timestamp)).toUTCString()}</small>
+				<small>Published {(new Date(timestamp)).toUTCString()}</small><br/>
+				<small><strong>{voteScore} {Math.abs(voteScore) === 1 ? 'vote ' : 'votes '}</strong></small>
+				<button onClick={() => this.props.dispatchDownVotePost(id)}>▼</button>
+				<button onClick={() => this.props.dispatchUpVotePost(id)}>▲</button>
 				<hr/>
 				<h2>Comments</h2>
 				<CommentsList postId={id}/>
@@ -44,4 +49,9 @@ class PostDisplay extends Component {
 	}
 }
 
-export default PostDisplay;
+const mapDispatchToProps = dispatch => ({
+	dispatchDownVotePost: postId => dispatch(downVotePost({postId})),
+	dispatchUpVotePost: postId => dispatch(upVotePost({postId})),
+});
+
+export default connect(null, mapDispatchToProps)(PostDisplay);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { updateCommentsList, fetchComments } from '../actions';
+import {fetchComments, upVoteComment, downVoteComment } from '../actions';
+import CommentsDisplay from './CommentDisplay';
 
 class CommentsList extends Component {
 
@@ -10,17 +11,17 @@ class CommentsList extends Component {
 	}
 
 	render() {
-		const {comments} = this.props;
+		const {comments, dispatchDownVoteComment, dispatchUpVoteComment} = this.props;
 		return (
 			<div>
-				{comments && comments.length ?
-					comments.map(comment => (
-						<div key={comment.id}>
-							<strong>{comment.author}</strong> says: <br/>
-							<p>{comment.body}</p>
-							<small>{comment.voteScore} {Math.abs(comment.voteScore) === 1 ? 'vote' : 'votes'}</small>
-						</div>
-					))
+				{comments && comments.length
+					? comments.map(comment =>
+						<CommentsDisplay
+							comment={comment}
+							key={comment.id}
+							onDownVoteComment={dispatchDownVoteComment}
+							onUpVoteComment={dispatchUpVoteComment} />
+					)
 					: 'No comments yet.'
 				}
 			</div>
@@ -34,9 +35,9 @@ const mapStateToProps = ({comments,}, {postId}) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	dispatchCommentsList: comments =>
-		dispatch(updateCommentsList({comments})),
 	dispatchFetchComments: postId => dispatch(fetchComments({postId})),
+	dispatchUpVoteComment: commentId => dispatch(upVoteComment({commentId})),
+	dispatchDownVoteComment: commentId => dispatch(downVoteComment({commentId})),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentsList);

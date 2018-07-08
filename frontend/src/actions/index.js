@@ -1,10 +1,16 @@
 import uuidv1 from 'uuid/v1';
 import {
 	addComment as serviceAddComment,
+	upVoteComment as serviceUpvoteComment,
+	downVoteComment as serviceDownVoteComment,
 	getCommentsForPost,
 } from '../service/comment-service';
 import { getCategories } from '../service/categories-service';
-import { getPosts } from '../service/post-service';
+import {
+	getPosts,
+	upVotePost as serviceUpvotePost,
+	downVotePost as serviceDownvotePost,
+} from '../service/post-service';
 
 const actionList = [
 	'ADD_COMMENT',
@@ -25,6 +31,38 @@ export const actions = actionList.reduce(
 		}),
 
 	{});
+
+export function upVotePost({postId}) {
+	return dispatch => serviceUpvotePost(postId)
+		.then(() => dispatch({
+			type: actions.UPVOTE_POST,
+			postId,
+		}));
+}
+
+export function downVotePost({postId}) {
+	return dispatch => serviceDownvotePost(postId)
+		.then(() => dispatch({
+			type: actions.DOWNVOTE_POST,
+			postId,
+		}));
+}
+
+export function upVoteComment({commentId}) {
+	return dispatch => serviceUpvoteComment(commentId)
+		.then(() => dispatch({
+			type: actions.UPVOTE_COMMENT,
+			commentId,
+		}));
+}
+
+export function downVoteComment({commentId}) {
+	return dispatch => serviceDownVoteComment(commentId)
+		.then(() => dispatch({
+			type: actions.DOWNVOTE_COMMENT,
+			commentId,
+		}));
+}
 
 export function fetchPosts() {
 	return dispatch => getPosts()

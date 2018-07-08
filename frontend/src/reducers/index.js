@@ -9,7 +9,7 @@ const initialState = {
 }
 
 export default function reducer(state = initialState, action) {
-	const {posts, categories, comments, comment} = action;
+	const {posts, categories, comments, comment, commentId, postId} = action;
 
 	switch(action.type) {
 		case actions.UPDATE_POSTS:
@@ -38,6 +38,42 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				comments: [...state.comments, comment],
+			};
+
+		case actions.UPVOTE_COMMENT:
+
+			return {
+				...state,
+				comments: state.comments.map(
+					comment => comment.id === commentId
+						? {...comment, voteScore: comment.voteScore + 1, } : comment),
+			};
+
+		case actions.DOWNVOTE_COMMENT:
+
+			return {
+				...state,
+				comments: state.comments.map(
+					comment => comment.id === commentId
+						? {...comment, voteScore: comment.voteScore - 1, } : comment),
+			};
+
+		case actions.DOWNVOTE_POST:
+
+			return {
+				...state,
+				posts: state.posts.map(
+					post => post.id === postId
+						? {...post, voteScore: post.voteScore - 1, } : post),
+			};
+
+		case actions.UPVOTE_POST:
+
+			return {
+				...state,
+				posts: state.posts.map(
+					post => post.id === postId
+						? {...post, voteScore: post.voteScore + 1, } : post),
 			};
 
 		default:
