@@ -26,34 +26,55 @@ class PostForm extends Component {
 		});
 	}
 
-	cancel = () => {
+	updateCategory = (category) => {
+		this.setState({
+			category,
+		});
+	}
+
+	goHome = () => {
 		this.setState({redirect: true});
 	}
 
-	addPost = ({body, title}) => {
+	addPost = ({body, title, category}) => {
 		const {dispatchNewPost,} = this.props;
 
-		dispatchNewPost({body, title,})
-			.then(this.cancel);
+		dispatchNewPost({body, title, category})
+			.then(this.goHome);
 	};
 
 	render() {
+		const {categories, selCategory} = this.props;
 		return (
 			this.state.redirect ?
 			<Redirect to={HOME} /> :
 			<div>
 				<div>Title: <textarea onChange={(e) => this.updateTitle(e.target.value)}></textarea></div>
 				<div>Body: <textarea onChange={(e) => this.updateBody(e.target.value)}></textarea></div>
+
+				<div>
+					Category:&nbsp;
+					<select onChange={e => this.updateCategory(e.target.value)}>
+						{categories && categories.length &&
+							categories.map(cat => <option key={cat.id} selected={selCategory}>{cat.name}</option>)
+						};
+					</select>
+				</div>
+
 				<button onClick={() => this.addPost(this.state)}>Submit</button>
-				<button onClick={this.cancel}>Cancel</button>
+				<button onClick={this.goHome}>Cancel</button>
 			</div>
 		);
 	}
 }
 
 const mapDispatchToProps = dispatch => ({
-	dispatchNewPost: ({body, title}) =>
-		dispatch(addPost({title, body})),
+	dispatchNewPost: ({title, body, category}) =>
+		dispatch(addPost({title, body, category})),
 });
 
-export default connect(null, mapDispatchToProps)(PostForm);
+const mapStateToProps = ({categories}) => ({
+	categories,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostForm);

@@ -133,7 +133,7 @@ export function addPost({title, body, category}) {
 		title,
 		body,
 		author: 'theuser',
-		category: category,
+		category,
 		voteScore: 0,
 		deleted: false,
 	};
