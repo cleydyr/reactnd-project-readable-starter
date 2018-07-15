@@ -9,7 +9,15 @@ const initialState = {
 }
 
 export default function reducer(state = initialState, action) {
-	const {posts, categories, comments, comment, commentId, postId} = action;
+	const {
+		posts,
+		categories,
+		comments,
+		comment,
+		commentId,
+		postId,
+		post,
+	} = action;
 
 	switch(action.type) {
 		case actions.UPDATE_POSTS:
@@ -74,6 +82,13 @@ export default function reducer(state = initialState, action) {
 				posts: state.posts.map(
 					post => post.id === postId
 						? {...post, voteScore: post.voteScore + 1, } : post),
+			};
+
+		case actions.ADD_POST:
+
+			return {
+				...state,
+				posts: [...state.posts, post],
 			};
 
 		default:

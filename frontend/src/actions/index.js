@@ -10,6 +10,7 @@ import {
 	getPosts,
 	upVotePost as serviceUpvotePost,
 	downVotePost as serviceDownvotePost,
+	addPost as serviceAddPost,
 } from '../service/wedeploy-post-service';
 
 const actionList = [
@@ -21,6 +22,7 @@ const actionList = [
 	'UPDATE_COMMENTS',
 	'UPDATE_POSTS',
 	'UPDATE_CATEGORIES',
+	'ADD_POST',
 ];
 
 export const actions = actionList.reduce(
@@ -121,5 +123,25 @@ export function addComment({postId, body,}) {
 			.then(comment => dispatch({
 				type: actions.ADD_COMMENT,
 				comment,
+			}));
+}
+
+export function addPost({title, body, category}) {
+	const newPost = {
+		id: uuidv1(),
+		timestamp: Date.now(),
+		title,
+		body,
+		author: 'theuser',
+		category: category,
+		voteScore: 0,
+		deleted: false,
+	};
+
+	return dispatch =>
+		serviceAddPost(newPost)
+			.then(post => dispatch({
+				type: actions.ADD_POST,
+				post,
 			}));
 }

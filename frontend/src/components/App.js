@@ -4,6 +4,13 @@ import PostDisplay from './PostDisplay';
 import RootDisplay from './RootDisplay';
 import {connect} from 'react-redux';
 import {fetchPosts, fetchCategories} from '../actions';
+import PostForm from './PostForm';
+import {
+	NEW_POST,
+	CATEGORY,
+	POST,
+	HOME,
+} from '../util/routes';
 
 class App extends Component {
   componentDidMount() {
@@ -26,17 +33,23 @@ class App extends Component {
 
     return (
       <div>
-		<h1><Link to="/">Readable App</Link></h1>
-		<Route exact path="/" render={postListWithCategory} />
-		<Route path="/category/:name"
+		<h1><Link to={HOME}>Readable App</Link></h1>
+
+		<Route exact path={HOME} render={postListWithCategory} />
+
+		<Route path={CATEGORY}
 			render={postListWithCategory}
 		/>
-		<Route path="/post/:id" render={
+
+		<Route exact path={NEW_POST} component={PostForm}/>
+
+		<Route path={POST} render={
 			({match}) => posts.length &&
 				<PostDisplay post={
 					posts.find(post => post.id === match.params.id)
 				}/>
 		}/>
+
       </div>
     );
   }

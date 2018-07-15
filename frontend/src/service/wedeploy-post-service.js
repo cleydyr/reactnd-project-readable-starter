@@ -10,8 +10,8 @@ export const getPostsForCategory = (categoryId) =>
 		.where('category', '=', categoryId)
 		.get('/posts');
 
-export const addPost = ({id, timestamp, title, body, author, category,}) =>
-	service.create('/posts', {id, timestamp, title, body, author, category,});
+export const addPost = ({id, timestamp, title, body, author, category, voteScore, deleted}) =>
+	service.create('/posts', {id, timestamp, title, body, author, category, voteScore, deleted});
 
 export const getPost = (id) =>
 	service.get(`/posts/${id}`);

@@ -5,4 +5,4 @@ const service = WeDeploy
 
 export const getCategories = () =>
 	service.get('/categories')
-		.then(([{categories}]) => console.log(categories) || categories);
+		.then(([{categories}]) => categories);
