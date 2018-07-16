@@ -14,14 +14,19 @@ class CommentsList extends Component {
 		const {comments, dispatchDownVoteComment, dispatchUpVoteComment} = this.props;
 		return (
 			<div>
+				<h2>Comments</h2>
 				{comments && comments.length
-					? comments.map(comment =>
-						<CommentsDisplay
-							comment={comment}
-							key={comment.id}
-							onDownVoteComment={dispatchDownVoteComment}
-							onUpVoteComment={dispatchUpVoteComment} />
-					)
+					?
+						<React.Fragment>
+							<h5>{comments.length} {comments.length == 1 ? 'comment' : 'comments'}</h5>
+								{comments.map(comment =>
+									<CommentsDisplay
+										comment={comment}
+										key={comment.id}
+										onDownVoteComment={dispatchDownVoteComment}
+										onUpVoteComment={dispatchUpVoteComment} />
+								)}
+						</React.Fragment>
 					: 'No comments yet.'
 				}
 			</div>

@@ -37,7 +37,6 @@ class PostDisplay extends Component {
 				<button onClick={() => this.props.dispatchDownVotePost(id)}>▼</button>
 				<button onClick={() => this.props.dispatchUpVotePost(id)}>▲</button>
 				<hr/>
-				<h2>Comments</h2>
 				<CommentsList postId={id}/>
 				{
 					this.state.commentEdit
