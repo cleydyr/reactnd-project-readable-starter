@@ -7,7 +7,6 @@ class CommentsList extends Component {
 
 	componentDidMount() {
 		const {postId, dispatchFetchComments} = this.props;
-		dispatchFetchComments(postId);
 	}
 
 	render() {
