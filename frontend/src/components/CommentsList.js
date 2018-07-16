@@ -13,7 +13,7 @@ class CommentsList extends Component {
 				{comments && comments.length
 					?
 						<React.Fragment>
-							<h5>{comments.length} {comments.length == 1 ? 'comment' : 'comments'}</h5>
+							<h5>{comments.length} {comments.length === 1 ? 'comment' : 'comments'}</h5>
 								{comments.map(comment =>
 									<CommentsDisplay
 										comment={comment}
