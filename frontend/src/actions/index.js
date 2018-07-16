@@ -80,17 +80,13 @@ export function fetchPosts() {
 }
 
 export function fetchCategories() {
-	return dispatch =>  {
-		return getCategories()
-			.then((categories) => dispatch(updateCategories({categories})));
-	}
+	return dispatch => getCategories()
+		.then((categories) => dispatch(updateCategories({categories})));
 }
 
 export function fetchComments({postId}) {
-	return dispatch =>  {
-		return getCommentsForPost(postId)
-			.then(comments => dispatch(updateCommentsList({comments,})));
-	}
+	return dispatch => getCommentsForPost(postId)
+		.then(comments => dispatch(mergeCommentsList({comments,})));
 }
 
 export function updateCategories({categories}) {
