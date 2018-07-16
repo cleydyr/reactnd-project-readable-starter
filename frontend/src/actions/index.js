@@ -68,7 +68,15 @@ export function downVoteComment({commentId}) {
 
 export function fetchPosts() {
 	return dispatch => getPosts()
-		.then(posts => dispatch(updatePosts({posts})));
+		.then(posts =>
+			Promise.all(
+				posts.map(post =>
+					getCommentsForPost(post.id)
+						.then(comments => dispatch(mergeCommentsList({comments})))
+				)
+			)
+			.then(dispatch(updatePosts({posts})))
+		);
 }
 
 export function fetchCategories() {
@@ -99,7 +107,7 @@ export function updatePosts({posts}) {
 	}
 }
 
-export function updateCommentsList({comments,}) {
+export function mergeCommentsList({comments,}) {
 	return {
 		type: actions.UPDATE_COMMENTS,
 		comments,

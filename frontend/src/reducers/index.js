@@ -38,7 +38,8 @@ export default function reducer(state = initialState, action) {
 
 			return {
 				...state,
-				comments,
+				comments: [...state.comments, ...comments.filter(
+					c => !state.comments.find(sc => sc.id === c.id))],
 			};
 
 		case actions.ADD_COMMENT:
