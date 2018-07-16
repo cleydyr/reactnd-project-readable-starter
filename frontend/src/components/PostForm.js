@@ -38,8 +38,9 @@ class PostForm extends Component {
 
 	addPost = ({body, title, category}) => {
 		const {dispatchNewPost,} = this.props;
+		const realCategory = category || this.props.selCategory || 'react';
 
-		dispatchNewPost({body, title, category})
+		dispatchNewPost({body, title, category: realCategory})
 			.then(this.goHome);
 	};
 
