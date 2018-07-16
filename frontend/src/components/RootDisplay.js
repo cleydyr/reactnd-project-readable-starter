@@ -7,9 +7,9 @@ export default function(props) {
 	const {categoryName, categories, posts} = props;
 	return (
 		<React.Fragment>
-			<h3>Categories</h3>
+			<h2>Categories</h2>
 			<CategoryList categories={categories}/>
-			<h3>Posts</h3>
+			<h2>Posts</h2>
 			<PostList posts={posts.filter(post => !categoryName || post.category === categoryName)}/>
 			<AddPostButton/>
 		</React.Fragment>
