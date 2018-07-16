@@ -5,10 +5,6 @@ import CommentsDisplay from './CommentDisplay';
 
 class CommentsList extends Component {
 
-	componentDidMount() {
-		const {postId, dispatchFetchComments} = this.props;
-	}
-
 	render() {
 		const {comments, dispatchDownVoteComment, dispatchUpVoteComment} = this.props;
 		return (
