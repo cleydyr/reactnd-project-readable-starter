@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import VoteDisplay from './VoteDisplay';
+import VoteControl from './VoteControl';
 import {upVoteComment, downVoteComment } from '../actions';
 import {connect} from 'react-redux';
 
@@ -20,7 +20,7 @@ class CommentsDisplay extends Component {
 			<div>
 				<strong>{author}</strong> says: <br/>
 				<p>{body}</p>
-				<VoteDisplay
+				<VoteControl
 					voteScore={voteScore}
 					onDownVote={this.downVoteComment}
 					onUpVote={this.upVoteComment}

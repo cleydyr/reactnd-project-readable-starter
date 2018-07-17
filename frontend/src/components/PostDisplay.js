@@ -4,7 +4,7 @@ import AddCommentButton from './AddCommentButton';
 import CommentForm from './CommentForm';
 import {connect} from 'react-redux';
 import { downVotePost, upVotePost } from '../actions';
-import VoteDisplay from './VoteDisplay';
+import VoteControl from './VoteControl';
 
 class PostDisplay extends Component {
 	constructor() {
@@ -42,7 +42,7 @@ class PostDisplay extends Component {
 				<em>by {author}</em>
 				<p>{body}</p>
 				<small>Published {(new Date(timestamp)).toUTCString()}</small><br/>
-				<VoteDisplay
+				<VoteControl
 					voteScore={voteScore}
 					onDownVote={this.downVotePost}
 					onUpVote={this.upVotePost}
