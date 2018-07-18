@@ -17,7 +17,7 @@ class PostItem extends Component {
 	render() {
 		const {id, title, author, timestamp, voteScore, commentCount} = this.props;
 		return (
-			<li key={id}>
+			<React.Fragment>
 				<Link to={`/post/${id}`}>
 					<h3>{title}</h3>
 				</Link>
@@ -29,7 +29,7 @@ class PostItem extends Component {
 						onDownVote={this.downVotePost}
 						onUpVote={this.upVotePost}
 				/>
-			</li>
+			</React.Fragment>
 		);
 	}
 }

@@ -12,9 +12,7 @@ class PostList extends Component {
 
 		return (
 			<ul>
-				{
-					postsWithCommentCount.map(post => <PostItem {...post}/>)
-				}
+				{postsWithCommentCount.map(post => <li><PostItem {...post}/></li>)}
 			</ul>
 		);
 	}
