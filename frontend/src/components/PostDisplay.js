@@ -5,6 +5,7 @@ import CommentForm from './CommentForm';
 import {connect} from 'react-redux';
 import { downVotePost, upVotePost } from '../actions';
 import VoteControl from './VoteControl';
+import EditDeletePostButton from './EditDeletePostButton';
 
 class PostDisplay extends Component {
 	constructor() {
@@ -47,6 +48,7 @@ class PostDisplay extends Component {
 					onDownVote={this.downVotePost}
 					onUpVote={this.upVotePost}
 				/>
+				<EditDeletePostButton id={id} />
 				<hr/>
 				<CommentsList postId={id}/>
 				{
