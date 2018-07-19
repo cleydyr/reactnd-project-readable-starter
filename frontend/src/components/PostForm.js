@@ -68,7 +68,7 @@ class PostForm extends Component {
 					Category:&nbsp;
 					<select onChange={e => this.updateCategory(e.target.value)}>
 						{categories && categories.length &&
-							categories.map(cat => <option key={cat.id} selected={selCategory}>{cat.name}</option>)
+							categories.map(cat => <option key={cat.name} selected={selCategory}>{cat.name}</option>)
 						};
 					</select>
 				</div>
