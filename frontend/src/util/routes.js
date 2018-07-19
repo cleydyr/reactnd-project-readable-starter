@@ -1,5 +1,5 @@
 export const NEW_POST = '/new/post';
-export const CATEGORY = '/category/:name';
+export const CATEGORY = '/:category';
 export const POST = '/post/:id';
 export const HOME = '/';
 export const EDIT_POST = '/edit/:id';

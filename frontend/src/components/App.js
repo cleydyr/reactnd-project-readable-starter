@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Link, withRouter, Redirect} from 'react-router-dom';
+import {Route, Link, withRouter, Redirect, Switch} from 'react-router-dom';
 import PostDisplay from './PostDisplay';
 import RootDisplay from './RootDisplay';
 import {connect} from 'react-redux';
@@ -29,7 +29,7 @@ class App extends Component {
 		<RootDisplay
 			posts={posts}
 			categories={categories}
-			categoryName={match.params && match.params.name}
+			categoryName={match.params && match.params.category}
 		/>
 	);
 
@@ -37,27 +37,29 @@ class App extends Component {
       <div>
 		<h1><Link to={HOME}>Readable App</Link></h1>
 
-		<Route exact path={HOME} render={postListWithCategory} />
+		<Switch>
+			<Route path={POST} render={
+				({match}) => posts.length &&
+					<PostDisplay post={
+						posts.find(post => post.id === match.params.id)
+					}/>
+			}/>
 
-		<Route path={CATEGORY}
-			render={postListWithCategory}
-		/>
+			<Route exact path={HOME} render={postListWithCategory} />
 
-		<Route exact path={NEW_POST} component={PostForm}/>
+			<Route exact path={NEW_POST} component={PostForm}/>
 
-		<Route path={POST} render={
-			({match}) => posts.length &&
-				<PostDisplay post={
-					posts.find(post => post.id === match.params.id)
-				}/>
-		}/>
+			<Route path={EDIT_POST} component={PostForm} />
 
-		<Route path={EDIT_POST} component={PostForm} />
+			<Route path={DELETE_POST} render={({match}) => {
+				dispatchDeletePost(match.params.id);
+				return <Redirect to={HOME} />
+			}} />
 
-		<Route path={DELETE_POST} render={({match}) => {
-			dispatchDeletePost(match.params.id);
-			return <Redirect to={HOME} />
-		}} />
+			<Route path={CATEGORY}
+				render={postListWithCategory}
+			/>
+		</Switch>
       </div>
     );
   }
