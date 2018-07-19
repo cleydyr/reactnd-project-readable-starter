@@ -43,6 +43,10 @@ class App extends Component {
 				return <Redirect to={HOME} />
 			}} />
 
+			<Route path={EDIT_POST} component={PostForm} />
+
+			<Route exact path={NEW_POST} component={PostForm}/>
+
 			<Route path={POST} render={
 				({match}) => posts.length &&
 					<PostDisplay post={
@@ -52,9 +56,7 @@ class App extends Component {
 
 			<Route exact path={HOME} render={postListWithCategory} />
 
-			<Route exact path={NEW_POST} component={PostForm}/>
 
-			<Route path={EDIT_POST} component={PostForm} />
 
 			<Route path={CATEGORY}
 				render={postListWithCategory}
