@@ -38,6 +38,11 @@ class App extends Component {
 		<h1><Link to={HOME}>Readable App</Link></h1>
 
 		<Switch>
+			<Route path={DELETE_POST} render={({match}) => {
+				dispatchDeletePost(match.params.id);
+				return <Redirect to={HOME} />
+			}} />
+
 			<Route path={POST} render={
 				({match}) => posts.length &&
 					<PostDisplay post={
@@ -50,11 +55,6 @@ class App extends Component {
 			<Route exact path={NEW_POST} component={PostForm}/>
 
 			<Route path={EDIT_POST} component={PostForm} />
-
-			<Route path={DELETE_POST} render={({match}) => {
-				dispatchDeletePost(match.params.id);
-				return <Redirect to={HOME} />
-			}} />
 
 			<Route path={CATEGORY}
 				render={postListWithCategory}
