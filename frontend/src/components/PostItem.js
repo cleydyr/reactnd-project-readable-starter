@@ -23,8 +23,7 @@ class PostItem extends Component {
 					<h3>{title}</h3>
 				</Link>
 				<div><em>Published {(new Date(timestamp)).toUTCString()} by <strong>{author}</strong></em></div>
-				<div><em>({voteScore} {Math.abs(voteScore) === 1 ? 'vote, ' : 'votes, '}
-					{commentCount} {Math.abs(commentCount) === 1 ? 'comment ' : 'comments '})</em></div>
+				<div><em>({commentCount} {Math.abs(commentCount) === 1 ? 'comment ' : 'comments '})</em></div>
 				<VoteControl
 						voteScore={voteScore}
 						onDownVote={this.downVotePost}
