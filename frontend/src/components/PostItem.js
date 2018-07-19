@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import VoteControl from './VoteControl';
 import {connect} from 'react-redux';
 import { downVotePost, upVotePost } from '../actions';
+import EditDeletePostButton from './EditDeletePostButton';
 
 class PostItem extends Component {
 
@@ -29,19 +30,7 @@ class PostItem extends Component {
 						onDownVote={this.downVotePost}
 						onUpVote={this.upVotePost}
 				/>
-				<div>
-					<span>
-						<Link to={`edit/${id}`}>
-							Edit
-						</Link>
-					</span>
-					&nbsp;
-					<span>
-						<Link to={`delete/${id}`}>
-							Delete
-						</Link>
-					</span>
-				</div>
+				<EditDeletePostButton id={id}/>
 			</React.Fragment>
 		);
 	}
