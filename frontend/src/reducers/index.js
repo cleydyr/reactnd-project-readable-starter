@@ -92,6 +92,13 @@ export default function reducer(state = initialState, action) {
 				posts: [...state.posts, post],
 			};
 
+		case actions.EDIT_POST:
+
+			return {
+				...state,
+				posts: state.posts.map(p => p.id === post.id ? post : p),
+			};
+
 		default:
 			return state;
 	}

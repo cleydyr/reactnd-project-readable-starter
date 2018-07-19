@@ -29,6 +29,19 @@ class PostItem extends Component {
 						onDownVote={this.downVotePost}
 						onUpVote={this.upVotePost}
 				/>
+				<div>
+					<span>
+						<Link to={`edit/${id}`}>
+							Edit
+						</Link>
+					</span>
+					&nbsp;
+					<span>
+						<Link to={`delete/${id}`}>
+							Delete
+						</Link>
+					</span>
+				</div>
 			</React.Fragment>
 		);
 	}

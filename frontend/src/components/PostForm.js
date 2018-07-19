@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { addPost } from '../actions';
+import { addPost, editPost } from '../actions';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { HOME } from '../util/routes';
@@ -7,11 +7,7 @@ import { HOME } from '../util/routes';
 class PostForm extends Component {
 	constructor() {
 		super();
-		this.state = {
-			body: '',
-			title: '',
-			redirect: false,
-		};
+		this.state = {};
 	}
 
 	updateBody = (body) => {
@@ -36,7 +32,8 @@ class PostForm extends Component {
 		this.setState({redirect: true});
 	}
 
-	addPost = ({body, title, category}) => {
+	addPost = () => {
+		const {body, title, category} = this.state;
 		const {dispatchNewPost,} = this.props;
 		const realCategory = category || this.props.selCategory || 'react';
 
@@ -44,14 +41,28 @@ class PostForm extends Component {
 			.then(this.goHome);
 	};
 
+	editPost= () => {
+		const {body, title} = this.state;
+		const {dispatchEditPost, post} = this.props;
+		const realPost = {
+			id: post.id,
+			body: body || post.body,
+			title: title || post.title,
+		};
+
+		dispatchEditPost(realPost)
+			.then(this.goHome);
+	}
+
 	render() {
-		const {categories, selCategory} = this.props;
+		const {categories, selCategory, post} = this.props;
+
 		return (
 			this.state.redirect ?
 			<Redirect to={HOME} /> :
 			<div>
-				<div>Title: <textarea onChange={(e) => this.updateTitle(e.target.value)}></textarea></div>
-				<div>Body: <textarea onChange={(e) => this.updateBody(e.target.value)}></textarea></div>
+				<div>Title: <textarea value={this.state.title || (post && post.title)} onChange={(e) => this.updateTitle(e.target.value)}></textarea></div>
+				<div>Body: <textarea value={this.state.body || (post && post.body)} onChange={(e) => this.updateBody(e.target.value)}></textarea></div>
 
 				<div>
 					Category:&nbsp;
@@ -62,7 +73,7 @@ class PostForm extends Component {
 					</select>
 				</div>
 
-				<button onClick={() => this.addPost(this.state)}>Submit</button>
+				<button onClick={post ? this.editPost : this.addPost}>Submit</button>
 				<button onClick={this.goHome}>Cancel</button>
 			</div>
 		);
@@ -72,10 +83,12 @@ class PostForm extends Component {
 const mapDispatchToProps = dispatch => ({
 	dispatchNewPost: ({title, body, category}) =>
 		dispatch(addPost({title, body, category})),
+	dispatchEditPost: post => dispatch(editPost({post})),
 });
 
-const mapStateToProps = ({categories}) => ({
+const mapStateToProps = ({categories, posts}, props) => ({
 	categories,
+	post: props.match && posts.find(post => post.id === props.match.params.id),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostForm);

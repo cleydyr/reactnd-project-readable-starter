@@ -10,6 +10,7 @@ import {
 	CATEGORY,
 	POST,
 	HOME,
+	EDIT_POST,
 } from '../util/routes';
 
 class App extends Component {
@@ -50,12 +51,14 @@ class App extends Component {
 				}/>
 		}/>
 
+		<Route path={EDIT_POST} component={PostForm} />
+
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
 	posts: state.posts,
 	categories: state.categories,
 });
