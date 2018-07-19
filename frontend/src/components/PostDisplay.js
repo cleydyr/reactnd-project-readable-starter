@@ -41,7 +41,7 @@ class PostDisplay extends Component {
 			<div>
 				<h1>{title}</h1>
 				<em>by {author}</em>
-				<p>{body}</p>
+				<p style={{whiteSpace: 'pre-wrap'}}>{body}</p>
 				<small>Published {(new Date(timestamp)).toUTCString()}</small><br/>
 				<VoteControl
 					voteScore={voteScore}
