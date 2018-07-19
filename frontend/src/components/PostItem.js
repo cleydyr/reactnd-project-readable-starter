@@ -15,10 +15,10 @@ class PostItem extends Component {
 	}
 
 	render() {
-		const {id, title, author, timestamp, voteScore, commentCount} = this.props;
+		const {id, title, author, timestamp, voteScore, commentCount, category} = this.props;
 		return (
 			<React.Fragment>
-				<Link to={`/post/${id}`}>
+				<Link to={`/${category}/${id}`}>
 					<h3>{title}</h3>
 				</Link>
 				<div><em>Published {(new Date(timestamp)).toUTCString()} by <strong>{author}</strong></em></div>

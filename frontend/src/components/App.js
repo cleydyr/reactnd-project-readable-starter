@@ -41,7 +41,7 @@ class App extends Component {
 			<Route path={POST} render={
 				({match}) => posts.length &&
 					<PostDisplay post={
-						posts.find(post => post.id === match.params.id)
+						posts.find(post => post.id === match.params.post_id)
 					}/>
 			}/>
 
