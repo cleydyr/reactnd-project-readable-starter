@@ -96,7 +96,7 @@ export default function reducer(state = initialState, action) {
 
 			return {
 				...state,
-				posts: state.posts.map(p => p.id === post.id ? post : p),
+				posts: state.posts.map(p => p.id === post.id ? {...p, ...post} : p),
 			};
 
 		case actions.DELETE_POST:
