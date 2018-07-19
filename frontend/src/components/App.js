@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {Route, Link, withRouter} from 'react-router-dom';
+import {Route, Link, withRouter, Redirect} from 'react-router-dom';
 import PostDisplay from './PostDisplay';
 import RootDisplay from './RootDisplay';
 import {connect} from 'react-redux';
-import {fetchPosts, fetchCategories} from '../actions';
+import {fetchPosts, fetchCategories, deletePost} from '../actions';
 import PostForm from './PostForm';
 import {
 	NEW_POST,
@@ -11,6 +11,7 @@ import {
 	POST,
 	HOME,
 	EDIT_POST,
+	DELETE_POST,
 } from '../util/routes';
 
 class App extends Component {
@@ -22,7 +23,7 @@ class App extends Component {
   }
 
   render() {
-	const {posts, categories} = this.props;
+	const {posts, categories, dispatchDeletePost} = this.props;
 
 	const postListWithCategory = ({match}) => (
 		<RootDisplay
@@ -53,6 +54,10 @@ class App extends Component {
 
 		<Route path={EDIT_POST} component={PostForm} />
 
+		<Route path={DELETE_POST} render={({match}) => {
+			dispatchDeletePost(match.params.id);
+			return <Redirect to={HOME} />
+		}} />
       </div>
     );
   }
@@ -65,7 +70,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
 	dispatchFetchCategories: () => dispatch(fetchCategories()),
-	dispatchFetchPosts: () =>	dispatch(fetchPosts()),
+	dispatchFetchPosts: () => dispatch(fetchPosts()),
+	dispatchDeletePost: postId => dispatch(deletePost({postId})),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

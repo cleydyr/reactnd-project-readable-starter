@@ -12,6 +12,7 @@ import {
 	downVotePost as serviceDownvotePost,
 	addPost as serviceAddPost,
 	editPost as serviceEditPost,
+	deletePost as serviceDeletePost,
 } from '../service/wedeploy-post-service';
 
 const actionList = [
@@ -25,6 +26,7 @@ const actionList = [
 	'UPDATE_CATEGORIES',
 	'ADD_POST',
 	'EDIT_POST',
+	'DELETE_POST',
 ];
 
 export const actions = actionList.reduce(
@@ -158,5 +160,14 @@ export function editPost({post}) {
 			.then(() => dispatch({
 				type: actions.EDIT_POST,
 				post,
+			}));
+}
+
+export function deletePost({postId}) {
+	return dispatch =>
+		serviceDeletePost(postId)
+			.then(() => dispatch({
+				type: actions.DELETE_POST,
+				postId,
 			}));
 }
