@@ -106,6 +106,14 @@ export default function reducer(state = initialState, action) {
 				posts: state.posts.filter(p => p.id !== postId),
 			}
 
+		case actions.EDIT_COMMENT:
+
+			return {
+				...state,
+				comments: state.comments.map(
+					c => c.id === comment.id ? {...c, ...comment} : c),
+			}
+
 		default:
 			return state;
 	}
