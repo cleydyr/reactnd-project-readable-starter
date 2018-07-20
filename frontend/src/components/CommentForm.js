@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { addComment } from '../actions';
-import {connect} from 'react-redux';
 
 class CommentForm extends Component {
 	constructor() {
@@ -16,29 +14,21 @@ class CommentForm extends Component {
 		});
 	}
 
-	addComment = (body) => {
-		const {dispatchComment, postId, onCancel} = this.props;
-
-		dispatchComment(postId)(body);
-
-		onCancel();
-	};
-
 	render() {
-		const {onCancel} = this.props;
+		const {onCancel, onSubmit, text} = this.props;
 		return (
-			<React.Fragment>
-				<textarea onChange={(e) => this.updateText(e.target.value)} placeholder="Type your comment here" /><br/>
+			<div>
+				<textarea
+					style={{display: 'block'}}
+					onChange={(e) => this.updateText(e.target.value)}
+					placeholder="Type your comment here"
+					value={this.state.text || text}
+				/>
 				<button onClick={onCancel}>Cancel</button>
-				<button onClick={() => this.addComment(this.state.text)}>Submit</button>
-			</React.Fragment>
+				<button onClick={() => onSubmit(this.state.text || text)}>Submit</button>
+			</div>
 		);
 	}
 }
 
-const mapDispatchToProps = dispatch => ({
-	dispatchComment: postId => body =>
-		dispatch(addComment({postId, body})),
-});
-
-export default connect(null, mapDispatchToProps)(CommentForm);
+export default CommentForm;

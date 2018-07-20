@@ -3,7 +3,7 @@ import CommentsList from './CommentsList';
 import AddCommentButton from './AddCommentButton';
 import CommentForm from './CommentForm';
 import {connect} from 'react-redux';
-import { downVotePost, upVotePost } from '../actions';
+import { downVotePost, upVotePost, addComment } from '../actions';
 import VoteControl from './VoteControl';
 import EditDeletePostButton from './EditDeletePostButton';
 
@@ -14,6 +14,13 @@ class PostDisplay extends Component {
 			commentEdit: false,
 		};
 	}
+
+	addComment = (body) => {
+		const {dispatchComment, post} = this.props;
+
+		dispatchComment(post.id)(body)
+			.then(this.cancelComment);
+	};
 
 	showCommentForm = () => {
 		this.setState({
@@ -53,7 +60,7 @@ class PostDisplay extends Component {
 				<CommentsList postId={id}/>
 				{
 					this.state.commentEdit
-					? <CommentForm onCancel={this.cancelComment} postId={id}/>
+					? <CommentForm onCancel={this.cancelComment} onSubmit={this.addComment}/>
 					: <AddCommentButton onClick={this.showCommentForm}/>
 				}
 			</div>
@@ -64,6 +71,8 @@ class PostDisplay extends Component {
 const mapDispatchToProps = dispatch => ({
 	dispatchDownVotePost: postId => dispatch(downVotePost({postId})),
 	dispatchUpVotePost: postId => dispatch(upVotePost({postId})),
+	dispatchComment: postId => body =>
+		dispatch(addComment({postId, body})),
 });
 
 export default connect(null, mapDispatchToProps)(PostDisplay);
