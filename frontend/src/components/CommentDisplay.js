@@ -20,7 +20,8 @@ class CommentsDisplay extends Component {
 
 	editComment = (body) => {
 		const {dispatchEditComment, comment: {id}} = this.props;
-		dispatchEditComment(id)(body);
+		dispatchEditComment(id)(body)
+			.then(this.toggleEdit);
 	}
 
 	downVoteComment = () => {
