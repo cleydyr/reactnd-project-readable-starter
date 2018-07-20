@@ -5,6 +5,7 @@ import {
 	downVoteComment as serviceDownVoteComment,
 	getCommentsForPost,
 	editComment as serviceEditComment,
+	deleteComment as serviceDeleteComment,
 } from '../service/wedeploy-comment-service';
 import { getCategories } from '../service/wedeploy-categories-service';
 import {
@@ -29,6 +30,7 @@ const actionList = [
 	'EDIT_POST',
 	'DELETE_POST',
 	'EDIT_COMMENT',
+	'DELETE_COMMENT',
 ];
 
 export const actions = actionList.reduce(
@@ -183,3 +185,13 @@ export function editComment({id, body}) {
 				comment: editedComment,
 			}));
 }
+
+export function deleteComment({commentId}) {
+	return dispatch =>
+		serviceDeleteComment(commentId)
+			.then(() => dispatch({
+				type: actions.DELETE_COMMENT,
+				commentId,
+			}));
+}
+

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import VoteControl from './VoteControl';
-import {upVoteComment, downVoteComment, editComment } from '../actions';
+import {upVoteComment, downVoteComment, editComment, deleteComment} from '../actions';
 import {connect} from 'react-redux';
 import CommentForm from './CommentForm';
 
@@ -22,6 +22,11 @@ class CommentsDisplay extends Component {
 		const {dispatchEditComment, comment: {id}} = this.props;
 		dispatchEditComment(id)(body)
 			.then(this.toggleEdit);
+	}
+
+	deleteComment = () => {
+		const {dispatchDeleteComment, comment: {id}} = this.props;
+		dispatchDeleteComment(id);
 	}
 
 	downVoteComment = () => {
@@ -52,7 +57,10 @@ class CommentsDisplay extends Component {
 						text={body}
 						onSubmit={this.editComment}
 						onCancel={this.toggleEdit}/>
-					: <button onClick={this.toggleEdit}>Edit</button>
+					: <React.Fragment>
+						<button onClick={this.toggleEdit}>Edit</button>
+						<button onClick={this.deleteComment}>Delete</button>
+					</React.Fragment>
 				}
 				</div>
 			</div>
@@ -64,6 +72,7 @@ const mapDispatchToProps = dispatch => ({
 	dispatchUpVoteComment: commentId => dispatch(upVoteComment({commentId})),
 	dispatchDownVoteComment: commentId => dispatch(downVoteComment({commentId})),
 	dispatchEditComment: commentId => body => dispatch(editComment({id: commentId, body})),
+	dispatchDeleteComment: commentId => dispatch(deleteComment({commentId})),
 });
 
 export default connect(null, mapDispatchToProps)(CommentsDisplay);

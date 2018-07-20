@@ -114,6 +114,13 @@ export default function reducer(state = initialState, action) {
 					c => c.id === comment.id ? {...c, ...comment} : c),
 			}
 
+		case actions.DELETE_COMMENT:
+
+			return {
+				...state,
+				comments: state.comments.filter(c => c.id !== commentId),
+			}
+
 		default:
 			return state;
 	}
