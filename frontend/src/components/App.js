@@ -13,6 +13,7 @@ import {
 	EDIT_POST,
 	DELETE_POST,
 } from '../util/routes';
+import NotFound from './NotFound';
 
 class App extends Component {
   componentDidMount() {
@@ -48,15 +49,15 @@ class App extends Component {
 			<Route exact path={NEW_POST} component={PostForm}/>
 
 			<Route path={POST} render={
-				({match}) => posts.length &&
-					<PostDisplay post={
-						posts.find(post => post.id === match.params.post_id)
-					}/>
+				({match}) => {
+					const thePost = posts.find(post => post.id === match.params.post_id);
+					return thePost ?
+						<PostDisplay post={thePost}/>
+						: <NotFound />;
+				}
 			}/>
 
 			<Route exact path={HOME} render={postListWithCategory} />
-
-
 
 			<Route path={CATEGORY}
 				render={postListWithCategory}
