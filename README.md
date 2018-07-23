@@ -1,22 +1,5 @@
-# Readable API Server
+# Readable App
+This app has been developed as a requirement for the second module of Udacity's React Nanodegree course. This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
-
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
-
-## Start Developing
-
-To get started developing right away:
-
-* Install and start the API server
-    - `cd api-server`
-    - `npm install`
-    - `node server`
-* In another terminal window, use Create React App to scaffold out the front-end
-    - `create-react-app frontend`
-    - `cd frontend`
-    - `npm start`
-
-## API Server
-
-Information about the API server and how to use it can be found in its [README file](api-server/README.md).
+## Running the app
+First, clone or download the source code. Once you have the code, navigate to the folder `frontend` and then run `npm install` to install the dependencies of the project. After the dependencies are installed, you have to run `npm start` to start the app. In this version of the project you don't have to start a local server, as a data API is available on data-readable.wedeploy.io.
